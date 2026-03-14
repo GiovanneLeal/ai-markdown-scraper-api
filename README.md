@@ -47,3 +47,50 @@ Clone o repositório e acesse a pasta do projeto:
 ```bash
 git clone [https://github.com/GiovanneLeal/ai-markdown-scraper-api.git](https://github.com/GiovanneLeal/ai-markdown-scraper-api.git)
 cd ai-markdown-scraper-api
+```
+
+### 3. Variáveis de Ambiente
+Crie um arquivo .env na raiz do projeto com as suas chaves de segurança:
+```bash
+Snippet de código
+WALLET_ADDRESS=sua_carteira_aqui
+ADMIN_SECRET=sua_senha_secreta
+```
+### 4. Construindo e Executando (Docker)
+Inicie o container para construir o ambiente com o Chrome invisível:
+```bash
+docker build -t ai-scraper-api .
+docker run -p 8000:8000 --env-file .env ai-scraper-api
+```
+A API estará disponível em http://localhost:8000. Acesse http://localhost:8000/docs para interagir com o Swagger UI.
+
+### 📡 Como Usar (Endpoint)
+```bash
+POST /scrape
+```
+Endpoint principal para raspar uma URL. Requer autenticação no cabeçalho.
+
+### Exemplo de Requisição (cURL):
+```bash
+curl -X 'POST' \
+  'http://localhost:8000/scrape' \
+  -H 'accept: application/json' \
+  -H 'x-payment-hash: sua_senha_secreta' \
+  -H 'Content-Type: application/json' \
+  -d '{"url": "https://pt.wikipedia.org/wiki/Web_scraping"}'
+```
+### Exemplo de Resposta:
+```bash
+JSON
+{
+  "status": "success",
+  "cached": false,
+  "data": "# Web scraping\n\nWeb scraping é a extração de dados de sites da web. Isso é feito por meio de um software que simula a navegação humana..."
+}
+```
+---
+
+### ⚠️ Aviso Legal e Ética
+Nota Importante: Este projeto tem fins educacionais e de demonstração de arquitetura de software. O Web Scraping deve ser feito com responsabilidade. Sempre verifique o arquivo robots.txt e os Termos de Serviço do site alvo antes de realizar a extração de dados em larga escala.
+
+---
