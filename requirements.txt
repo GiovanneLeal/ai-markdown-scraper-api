@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pydantic
+beautifulsoup4
+html2text
+web3
+python-dotenv
+readability-lxml
+undetected-chromedriver
+selenium
+python-dotenv
